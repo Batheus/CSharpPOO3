@@ -10,45 +10,48 @@ namespace ByteBank
     {
         static void Main(string[] args)
         {
-            // ContaCorrente conta = new ContaCorrente(9874, 456789);
-            // Console.WriteLine(ContaCorrente.TaxaOperacao);
-
             try
             {
                 Metodo();
             }
-            catch (DivideByZeroException excecao)
+            catch (DivideByZeroException erro) // Só é permitido colocar exceções expecíficas acima da classe base (Exception)
             {
-                Console.WriteLine(excecao.Message);
-                Console.WriteLine(excecao.StackTrace);
+                Console.WriteLine("Não é permitida a divisão por zero");
+            }
+            catch (Exception erro)
+            {
+                Console.WriteLine(erro.Message);
+                Console.WriteLine(erro.StackTrace);
+                Console.WriteLine("Aconteceu um erro!");
             }
 
             Console.ReadLine();
         }
 
-        public static int Dividir(int numero, int divisor)
+        // Teste com a cadeia de chamada:
+        // Metodo -> TestaDivisao -> Dividir
+        private static void Metodo()
         {
-            ContaCorrente conta = null;
-            Console.WriteLine(conta.Saldo);
-            return numero / divisor;
+            TestaDivisao(0);
         }
 
-        static void Metodo()
+        private static void TestaDivisao(int divisor)
+        {
+            int resultado = Dividir(10, divisor);
+            Console.WriteLine("Resultado da divisão de 10 por " + divisor + " é " + resultado);
+        }
+
+        private static int Dividir(int numero, int divisor)
         {
             try
             {
-                TestaDivisao(0);
+                return numero / divisor;
             }
-            catch (NullReferenceException excecao)
+            catch (DivideByZeroException)
             {
-                Console.WriteLine(excecao.Message);
-                Console.WriteLine(excecao.StackTrace);
+                Console.WriteLine("Exceção com número=" + numero + " e divisor=" + divisor);
+                throw;
             }
-        }
-
-        static void TestaDivisao(int divisor)
-        {
-            Dividir(10, divisor);
         }
     }
 }
