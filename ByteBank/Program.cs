@@ -11,33 +11,53 @@ namespace ByteBank
     {
         static void Main(string[] args)
         {
-            CarregarContas();
+            try
+            {
+                CarregarContas();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("CATCH NO METODO MAIN");
+            }
+
             Console.ReadLine();
         }
 
         private static void CarregarContas()
         {
-            LeitorDeArquivo leitor = null;
-            
-            try
+            // Debaixo dos panos o using chamou o método Dispose, por isso não precisamos explicitar a chamada no código
+            // É como se a máquina virtual "transformasse" o using em um try catch/finally
+            using (LeitorDeArquivo leitor = new LeitorDeArquivo("teste.txt"))
             {
-                leitor = new LeitorDeArquivo("contas.txt");
+                leitor.LerProximaLinha();
+            }
 
-                leitor.LerProximaLinha();
-                leitor.LerProximaLinha();
-                leitor.LerProximaLinha();
-            }
-            catch (IOException)
-            {
-                Console.WriteLine("Exceção do tipo IOException capturada e tratada!");
-            }
-            finally // Sempre é executado, seja depois do try ou do catch
-            {
-                if (leitor != null)
-                {
-                    leitor.Fechar();
-                }
-            }
+            // -----------------------------------------------------------
+            // Mesma lógica, só que com uma construção e sintaxe diferente
+            // -----------------------------------------------------------
+
+            //LeitorDeArquivo leitor = null;
+
+            //try // Try é usado sempre com catch ou finally
+            //{
+            //    leitor = new LeitorDeArquivo("contas.txt");
+
+            //    leitor.LerProximaLinha();
+            //    leitor.LerProximaLinha();
+            //    leitor.LerProximaLinha();
+            //}
+            //catch (IOException)
+            //{
+            //    Console.WriteLine("Exceção do tipo IOException capturada e tratada!");
+            //}
+            //finally // Sempre é executado, seja depois do try ou do catch
+            //{
+            //    Console.WriteLine("Executando o finally");
+            //    if (leitor != null)
+            //    {
+            //        leitor.Fechar();
+            //    }
+            //}
         }
 
         private static void TestaInnerException()
