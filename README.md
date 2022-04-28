@@ -1,9 +1,10 @@
 # CSharpPOO3
 C# parte 4: Entendendo exceções
 
-Parte 1: Primeiros passos com exceções
-Parte 2: Tratamento de exceções
-Parte 3: ArgumentException, ParamName e nameof
-Parte 4: Criando exceções ricas
-Parte 5: StackTrace e InnerException
+## Tópicos abordados
+Parte 1: Primeiros passos com exceções <br>
+Parte 2: Tratamento de exceções <br>
+Parte 3: ArgumentException, ParamName e nameof <br>
+Parte 4: Criando exceções ricas <br>
+Parte 5: StackTrace e InnerException <br>
 Parte 6: Finally e using
