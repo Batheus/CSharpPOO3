@@ -12,18 +12,25 @@ namespace ByteBank
         {
             try
             {
-                Metodo();
+                ContaCorrente conta = new ContaCorrente(456, 0);
             }
-            catch (DivideByZeroException erro) // Só é permitido colocar exceções expecíficas acima da classe base (Exception)
+            catch (ArgumentException ex)
             {
-                Console.WriteLine("Não é permitida a divisão por zero");
+                if (ex.ParamName == "numero")
+                {
+
+                }
+
+                Console.WriteLine("Argumento com problema: " + ex.ParamName);
+                Console.WriteLine("Ocorreu uma exceção do tipo ArgumentException");
+                Console.WriteLine(ex.Message);
             }
-            catch (Exception erro)
+            catch (Exception ex)
             {
-                Console.WriteLine(erro.Message);
-                Console.WriteLine(erro.StackTrace);
-                Console.WriteLine("Aconteceu um erro!");
+                Console.WriteLine(ex.Message);
             }
+
+            //Metodo();
 
             Console.ReadLine();
         }
